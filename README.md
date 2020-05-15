@@ -1,6 +1,17 @@
 <h1 align="center">lorassets</h1>
 Automatically built and well organized Legends of Runeterra data and asset bundles. This was made because it was very difficult to pull this data from the LoR Data Dragon, as it is currently served in a bunch of separate ZIP files.
 
+## Table of Contents
+- [Table of Contents](#table-of-contents)
+- [TO-DOs](#to-dos)
+- [Endpoints](#endpoints)
+  - [`GET` /metadata.json](#get-metadatajson)
+  - [`GET` /:locale/data/cards.json](#get-localedatacardsjson)
+  - [`GET` /:locale/data/globals.json](#get-localedataglobalsjson)
+  - [`GET` /:locale/img/cards/:image](#get-localeimgcardsimage)
+  - [`GET` /:locale/img/regions/:image](#get-localeimgregionsimage)
+- [Notice](#notice)
+
 ## TO-DOs
 
 *Pull requests are welcome!*
@@ -9,14 +20,6 @@ Automatically built and well organized Legends of Runeterra data and asset bundl
 - [ ] Replace pvp.net asset URLs in card entries with our URLs
 
 ## Endpoints
-
-- [`GET` /metadata.json]()
-- [`GET` /:locale/data/cards.json]()
-- [`GET` /:locale/data/globals.json]()
-- [`GET` /:locale/img/cards/:image]()
-- [`GET` /:locale/img/regions/:image]()
-
-<hr>
 
 ### `GET` /metadata.json
 
