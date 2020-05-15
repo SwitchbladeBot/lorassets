@@ -14,6 +14,7 @@ locales.forEach(locale => {
   cardData[locale] = {}
 })
 
+fs.mkdirSync('build')
 fs.writeFileSync('build/metadata.json', JSON.stringify({ locales, sets }))
 
 locales.forEach(locale => {
