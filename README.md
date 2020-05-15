@@ -30,14 +30,18 @@ Information about which locales and sets are available
 ```json
 {
     "locales": [
-        "de_de",
         "en_us",
-        "es_es",
-        "fr_fr",
-        "it_it",
-        "ja_jp",
         "ko_kr",
-        "pt_br"
+        "fr_fr",
+        "es_es",
+        "de_de",
+        "it_it",
+        "es_mx",
+        "pt_br",
+        "tr_tr",
+        "ru_ru",
+        "ja_jp",
+        "zh_tw"
     ],
     "sets": [
         "1",
