@@ -15,6 +15,9 @@ locales.forEach(locale => {
 })
 
 fs.mkdirSync('build')
+fs.mkdirSync('downloads')
+fs.mkdirSync('extracted')
+
 fs.writeFileSync('build/metadata.json', JSON.stringify({ locales, sets }))
 
 locales.forEach(locale => {
