@@ -141,3 +141,9 @@ Images for each region in the game
 **Example** [`https://lorassets.switchblade.xyz/en_us/img/regions/icon-bilgewater.png`](`https://lorassets.switchblade.xyz/en_us/img/regions/icon-bilgewater.png`)
 
 ![Bilgewater](https://lorassets.switchblade.xyz/en_us/img/regions/icon-bilgewater.png)
+
+## Notice
+
+- Switchblade isn`t endorsed by Riot Games and doesn’t reflect the views or opinions of Riot Games or anyone officially involved in producing or managing League of Legends. League of Legends™ and Riot Games are trademarks or registered trademarks of Riot Games, Inc.
+
+- All assets and data that the code in this repository downloads and compiles are owned by Riot Games, Inc.
