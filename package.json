@@ -1,0 +1,26 @@
+{
+  "name": "lorassets",
+  "version": "1.0.0",
+  "description": "Scripts for downloading and organizing Legends of Runeterra asset and data bundles",
+  "main": "src/index.js",
+  "scripts": {
+    "build": "node src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SwitchbladeBot/lorassets.git"
+  },
+  "author": "Pedro Fracassi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SwitchbladeBot/lorassets/issues"
+  },
+  "homepage": "https://github.com/SwitchbladeBot/lorassets#readme",
+  "devDependencies": {
+    "standard": "^14.3.4"
+  },
+  "dependencies": {
+    "extract-zip": "^2.0.0",
+    "node-fetch": "^2.6.0"
+  }
+}
