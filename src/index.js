@@ -1,5 +1,6 @@
 const fetch = require('node-fetch')
 const extract = require('extract-zip')
+require('array-flat-polyfill')
 
 const fs = require('fs')
 const path = require('path')
