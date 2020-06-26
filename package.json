@@ -1,6 +1,6 @@
 {
   "name": "lorassets",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Scripts for downloading and organizing Legends of Runeterra asset and data bundles",
   "main": "src/index.js",
   "scripts": {
