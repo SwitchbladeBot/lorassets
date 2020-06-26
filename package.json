@@ -4,7 +4,8 @@
   "description": "Scripts for downloading and organizing Legends of Runeterra asset and data bundles",
   "main": "src/index.js",
   "scripts": {
-    "build": "node src/index.js"
+    "build": "node src/index.js",
+    "debug": "node --inspect-brk src/index.js"
   },
   "repository": {
     "type": "git",
@@ -21,7 +22,7 @@
   },
   "dependencies": {
     "array-flat-polyfill": "^1.0.1",
-    "extract-zip": "^2.0.0",
+    "extract-zip": "^2.0.1",
     "node-fetch": "^2.6.0"
   }
 }
