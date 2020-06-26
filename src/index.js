@@ -28,15 +28,15 @@ locales.forEach(locale => {
 
   const fileName = `core-${locale}.zip`
   console.log(`Downloading ${fileName}`)
-  downloadFile(fileName).then((savePath) => {
+  downloadFile(fileName).then(savePath => {
     console.log(`Finished downloading ${fileName}`)
     console.log(`Extracting ${fileName}`)
-    extract(savePath, { dir: `${__dirname}/../extracted/${path.basename(savePath, '.zip')}` }).then(() => {
+    extract(savePath, { dir: path.join(__dirname, `/../extracted`) }).then(() => {
       console.log(`Finished extracting ${fileName}`)
-      fs.copyFileSync(`./extracted/core-${locale}/${locale}/data/globals-${locale}.json`, `build/${locale}/data/globals.json`)
+      fs.copyFileSync(path.join(__dirname, `/../extracted/core-${locale}/${locale}/data/globals-${locale}.json`), path.join(__dirname, `/../build/${locale}/data/globals.json`))
       fs.readdirSync(`./extracted/core-${locale}/${locale}/img/regions`).forEach(regionImage => {
         console.log(`Copying ${locale} ${regionImage}`)
-        fs.copyFileSync(`./extracted/core-${locale}/${locale}/img/regions/${regionImage}`, `build/${locale}/img/regions/${regionImage}`)
+        fs.copyFileSync(`./extracted/core-${locale}/${locale}/img/regions/${regionImage}`, `./build/${locale}/img/regions/${regionImage}`)
       })
     })
   })
@@ -47,7 +47,7 @@ locales.forEach(locale => {
     downloadFile(fileName).then((savePath) => {
       console.log(`Finished downloading ${fileName}`)
       console.log(`Extracting ${fileName}`)
-      extract(savePath, { dir: `${__dirname}/../extracted/${path.basename(savePath, '.zip')}` }).then(() => {
+      extract(savePath, { dir: `${__dirname}/../extracted` }).then(() => {
         console.log(`Finished extracting ${fileName}`)
         const setCards = require(`../extracted/set${set}-${locale}/${locale}/data/set${set}-${locale}.json`)
         addCards(setCards, locale, set)
@@ -55,6 +55,8 @@ locales.forEach(locale => {
           console.log(`Copying ${cardImage} in ${locale}`)
           fs.copyFileSync(`./extracted/set${set}-${locale}/${locale}/img/cards/${cardImage}`, `build/${locale}/img/cards/${cardImage}`)
         })
+      }).catch(e => {
+        console.error(e)
       })
     })
   })
