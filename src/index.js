@@ -18,7 +18,7 @@ const ignore = [
   'README.md'
 ]
 
-fs.rmdirSync('build', { recursive: true })
+if (fs.existsSync('build')) fs.rmdirSync('build', { recursive: true })
 fs.mkdirSync('build')
 if (!fs.existsSync('downloads')) fs.mkdirSync('downloads')
 
