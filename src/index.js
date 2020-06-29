@@ -1,19 +1,25 @@
 const fetch = require('node-fetch')
-const extract = require('extract-zip')
+const yauzl = require("yauzl")
+const concat = require('concat-stream')
+const Progress = require('node-fetch-progress')
 require('array-flat-polyfill')
 
 const fs = require('fs')
 const path = require('path')
+const util = require('util')
 
 const locales = require('./locales.json')
 const sets = require('./sets.json')
 
 const BASE_DATADRAGON_URL = 'https://dd.b.pvp.net/latest/'
 
-const cardData = {}
-locales.forEach(locale => {
-  cardData[locale] = {}
-})
+const ignore = [
+  'COPYRIGHT',
+  'metadata.json',
+  'README.md'
+]
+
+const openZip = util.promisify(yauzl.open)
 
 fs.mkdirSync('build')
 fs.mkdirSync('downloads')
@@ -30,36 +36,66 @@ locales.forEach(locale => {
   console.log(`Downloading ${fileName}`)
   downloadFile(fileName).then(savePath => {
     console.log(`Finished downloading ${fileName}`)
-    console.log(`Extracting ${fileName}`)
-    extract(savePath, { dir: path.join(__dirname, `/../extracted`) }).then(() => {
-      console.log(`Finished extracting ${fileName}`)
-      fs.copyFileSync(path.join(__dirname, `/../extracted/core-${locale}/${locale}/data/globals-${locale}.json`), path.join(__dirname, `/../build/${locale}/data/globals.json`))
-      fs.readdirSync(`./extracted/core-${locale}/${locale}/img/regions`).forEach(regionImage => {
-        console.log(`Copying ${locale} ${regionImage}`)
-        fs.copyFileSync(`./extracted/core-${locale}/${locale}/img/regions/${regionImage}`, `./build/${locale}/img/regions/${regionImage}`)
+    console.log(`Extracting files from ${fileName}`)
+    openZip(savePath, { lazyEntries: true }).then(zipfile => {
+      zipfile.readEntry()
+      zipfile.on("entry", function(entry) {
+        if (/\/$/.test(entry.fileName)) return zipfile.readEntry() // Skip folders
+        if (ignore.includes(path.basename(entry.fileName))) return zipfile.readEntry() // Skip ignored files
+        zipfile.openReadStream(entry, function(err, readStream) {
+          if (err) throw err
+          readStream.on("end", () => zipfile.readEntry())
+          let destination = `build/${locale}/${path.basename(entry.fileName)}`
+          if (entry.fileName.startsWith(`core-${locale}/${locale}/img/regions/`)) {
+            destination = `build/${locale}/img/regions/${path.basename(entry.fileName)}`
+          }
+          if (path.basename(entry.fileName) === `globals-${locale}.json`) {
+            destination = `build/${locale}/data/globals.json`
+          }
+          console.info(`Extracting ${entry.fileName} to ${destination}`)
+          const file = fs.createWriteStream(destination)
+          readStream.pipe(file)
+        })
       })
-    })
-  })
+    }).catch(console.error)
+  }).catch(console.error)
 
   sets.forEach(set => {
     const fileName = `set${set}-${locale}.zip`
     console.log(`Downloading ${fileName}`)
-    downloadFile(fileName).then((savePath) => {
+    downloadFile(fileName).then(savePath => {
       console.log(`Finished downloading ${fileName}`)
       console.log(`Extracting ${fileName}`)
-      extract(savePath, { dir: `${__dirname}/../extracted` }).then(() => {
-        console.log(`Finished extracting ${fileName}`)
-        const setCards = require(`../extracted/set${set}-${locale}/${locale}/data/set${set}-${locale}.json`)
-        addCards(setCards, locale, set)
-        fs.readdirSync(`./extracted/set${set}-${locale}/${locale}/img/cards`).forEach(cardImage => {
-          console.log(`Copying ${cardImage} in ${locale}`)
-          fs.copyFileSync(`./extracted/set${set}-${locale}/${locale}/img/cards/${cardImage}`, `build/${locale}/img/cards/${cardImage}`)
+
+      openZip(savePath, { lazyEntries: true }).then(zipfile => {
+        zipfile.readEntry()
+        zipfile.on("entry", function(entry) {
+          if (/\/$/.test(entry.fileName)) return zipfile.readEntry() // Skip folders
+          if (ignore.includes(path.basename(entry.fileName))) return zipfile.readEntry() // Skip ignored files
+          zipfile.openReadStream(entry, function(err, readStream) {
+            if (err) throw err
+            readStream.on('data', () => zipfile.readEntry())
+            let destination = `build/${locale}/${path.basename(entry.fileName)}`
+
+            if (entry.fileName.startsWith(`set${set}-${locale}/${locale}/img/cards/`)) {
+              console.info(`Extracting ${entry.fileName} to ${destination}`)
+              const file = fs.createWriteStream(`build/${locale}/img/cards/${path.basename(entry.fileName)}`)
+              readStream.pipe(file)
+            }
+
+            if (path.basename(entry.fileName) === `set${set}-${locale}.json`) {
+              zipfile.readEntry()
+            }
+          })
         })
-      }).catch(e => {
-        console.error(e)
-      })
+      }).catch(console.error)
     })
   })
+})
+
+const cardData = {}
+locales.forEach(locale => {
+  cardData[locale] = {}
 })
 
 function addCards (cards, locale, set) {
@@ -77,6 +113,7 @@ function downloadFile (fileName) {
     const savePath = `downloads/${fileName}`
     fetch(`${BASE_DATADRAGON_URL}${fileName}`).then(res => {
       const dest = fs.createWriteStream(savePath)
+      const progress = new Progress(res, { throttle: 100 })
 
       dest.on('finish', () => {
         resolve(savePath)
@@ -86,7 +123,22 @@ function downloadFile (fileName) {
         reject(err)
       })
 
+      progress.on('progress', p => {
+        console.log(`${fileName}: ${Math.round(p.progress*100)}%`)
+      })
+
       res.body.pipe(dest)
     })
   })
+}
+
+function promisify(api) {
+  return function(...args) {
+    return new Promise(function(resolve, reject) {
+      api(...args, function(err, response) {
+        if (err) return reject(err);
+        resolve(response);
+      });
+    });
+  };
 }
