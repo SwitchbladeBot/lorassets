@@ -1,6 +1,5 @@
 const fetch = require('node-fetch')
 const AdmZip = require('adm-zip')
-const concat = require('concat-stream')
 const Progress = require('node-fetch-progress')
 require('array-flat-polyfill')
 
