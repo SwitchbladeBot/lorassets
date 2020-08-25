@@ -15,7 +15,10 @@ const ignore = [
   'README.md'
 ]
 
-if (fs.existsSync('build')) fs.rmdirSync('build', { recursive: true })
+if (fs.existsSync('build')) {
+  console.log('removing')
+  fs.rmdirSync('build', { recursive: true,  })
+}
 fs.mkdirSync('build')
 if (!fs.existsSync('downloads')) fs.mkdirSync('downloads')
 
@@ -91,7 +94,6 @@ async function build () {
           fs.writeFileSync(`build/${locale}/data/globals.json`, zip.readFile(entry))
           return
         }
-
       })
     }).catch(console.error)
 
@@ -129,7 +131,7 @@ async function build () {
   locales.forEach(locale => {
     cardData[locale] = {}
   })
-
+  
   function addCards (cards, locale, set) {
     cardData[locale][set] = cards
     console.log(`Got card data for set ${set} in ${locale}.`)
