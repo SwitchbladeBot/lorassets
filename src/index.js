@@ -18,7 +18,10 @@ const ignore = [
   'README.md'
 ]
 
-if (fs.existsSync('build')) fs.rmdirSync('build', { recursive: true })
+if (fs.existsSync('build')) {
+  console.log('removing')
+  fs.rmdirSync('build', { recursive: true,  })
+}
 fs.mkdirSync('build')
 if (!fs.existsSync('downloads')) fs.mkdirSync('downloads')
 
@@ -44,7 +47,7 @@ locales.forEach(locale => {
       console.log(`Extracting ${entry.entryName}`)
 
       // Region icons
-      if (entry.entryName.startsWith(`core-${locale}/${locale}/img/regions/`)) {
+      if (entry.entryName.startsWith(`${locale}/img/regions/`)) {
         zip.extractEntryTo(entry, `build/${locale}/img/regions`)
         return
       }
@@ -78,7 +81,7 @@ locales.forEach(locale => {
         }
 
         // Card images
-        if (entry.entryName.startsWith(`set${set}-${locale}/${locale}/img/cards/`)) {
+        if (entry.entryName.startsWith(`${locale}/img/cards/`)) {
           zip.extractEntryTo(entry, `build/${locale}/img/cards`, false)
           return
         }
@@ -108,12 +111,14 @@ let progressData = {}
 function downloadFile (fileName) {
   return new Promise((resolve, reject) => {
     const savePath = `downloads/${fileName}`
+    const tempPath = `${savePath}.tmp`
     if (fs.existsSync(savePath)) return resolve(savePath)
     fetch(`${BASE_DATADRAGON_URL}${fileName}`).then(res => {
-      const dest = fs.createWriteStream(savePath)
+      const dest = fs.createWriteStream(tempPath)
       const progress = new Progress(res, { throttle: 100 })
 
       dest.on('finish', () => {
+        fs.renameSync(tempPath, savePath)
         resolve(savePath)
       })
 
