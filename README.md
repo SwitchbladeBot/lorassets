@@ -25,7 +25,7 @@ Automatically built and well organized Legends of Runeterra data and asset bundl
 
 Information about which locales and sets are available
 
-**Example** [`https://lorassets.switchblade.xyz/metadata.json`](`https://lorassets.switchblade.xyz/metadata.json`)
+**Example** [`https://lorassets.switchblade.xyz/metadata.json`](https://lorassets.switchblade.xyz/metadata.json)
 
 ```json
 {
@@ -54,7 +54,7 @@ Information about which locales and sets are available
 
 All Legends of Runeterra cards as of the latest set
 
-**Example** [`https://lorassets.switchblade.xyz/en_us/data/cards.json`](`https://lorassets.switchblade.xyz/en_us/data/cards.json`)
+**Example** [`https://lorassets.switchblade.xyz/en_us/data/cards.json`](https://lorassets.switchblade.xyz/en_us/data/cards.json)
 
 ```json
 [
@@ -106,7 +106,7 @@ All Legends of Runeterra cards as of the latest set
 > 
 > [**(Riot Developer Portal)**](https://developer.riotgames.com/docs/lor#data-dragon_set-bundles)
 
-**Example** [`https://lorassets.switchblade.xyz/en_us/data/globals.json`](`https://lorassets.switchblade.xyz/en_us/data/globals.json`)
+**Example** [`https://lorassets.switchblade.xyz/en_us/data/globals.json`](https://lorassets.switchblade.xyz/en_us/data/globals.json)
 
 ```json
 {
@@ -137,7 +137,7 @@ All Legends of Runeterra cards as of the latest set
 > 
 > [**(Riot Developer Portal)**](https://developer.riotgames.com/docs/lor#data-dragon_core-bundles)
 
-**Example** [`https://lorassets.switchblade.xyz/en_us/img/cards/01FR009.png`](`https://lorassets.switchblade.xyz/en_us/img/cards/01FR009.png`)
+**Example** [`https://lorassets.switchblade.xyz/en_us/img/cards/01FR009.png`](https://lorassets.switchblade.xyz/en_us/img/cards/01FR009.png)
 
 ![Braum](https://lorassets.switchblade.xyz/en_us/img/cards/01FR009.png)
 
@@ -145,7 +145,7 @@ All Legends of Runeterra cards as of the latest set
 
 Images for each region in the game
 
-**Example** [`https://lorassets.switchblade.xyz/en_us/img/regions/icon-bilgewater.png`](`https://lorassets.switchblade.xyz/en_us/img/regions/icon-bilgewater.png`)
+**Example** [`https://lorassets.switchblade.xyz/en_us/img/regions/icon-bilgewater.png`](https://lorassets.switchblade.xyz/en_us/img/regions/icon-bilgewater.png)
 
 ![Bilgewater](https://lorassets.switchblade.xyz/en_us/img/regions/icon-bilgewater.png)
 
