@@ -1,4 +1,4 @@
-<h1 align="center">lorassets <img src="https://github.com/SwitchbladeBot/lorassets/workflows/CI/badge.svg" align="right"></h1>
+<h1>lorassets <img src="https://github.com/SwitchbladeBot/lorassets/workflows/CI/badge.svg"></h1>
 Automatically built and well organized Legends of Runeterra data and asset bundles. This was made because it was very difficult to pull this data from the LoR Data Dragon, as it is currently served in a bunch of separate ZIP files.
 
 ## Table of Contents
