@@ -3,7 +3,6 @@ const AdmZip = require('adm-zip')
 const Progress = require('node-fetch-progress')
 require('array-flat-polyfill')
 const axios = require('axios').default
-const cldr = require('cldr')
 
 const fs = require('fs')
 
