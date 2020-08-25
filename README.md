@@ -106,7 +106,7 @@ All Legends of Runeterra cards as of the latest set
 > 
 > [**(Riot Developer Portal)**](https://developer.riotgames.com/docs/lor#data-dragon_set-bundles)
 
-**Example** [`https://lorassets.switchblade.xyz/en_us/img/cards/globals.json`](`https://lorassets.switchblade.xyz/en_us/data/globals.json`)
+**Example** [`https://lorassets.switchblade.xyz/en_us/data/globals.json`](`https://lorassets.switchblade.xyz/en_us/data/globals.json`)
 
 ```json
 {
