@@ -83,7 +83,7 @@ async function build () {
         console.log(`Extracting ${entry.entryName}`)
 
         // Region icons
-        if (entry.entryName.startsWith(`core-${locale}/${locale}/img/regions/`)) {
+        if (entry.entryName.startsWith(`${locale}/img/regions/`)) {
           zip.extractEntryTo(entry, `build/${locale}/img/regions`)
           return
         }
@@ -116,7 +116,7 @@ async function build () {
           }
 
           // Card images
-          if (entry.entryName.startsWith(`set${set}-${locale}/${locale}/img/cards/`)) {
+          if (entry.entryName.startsWith(`${locale}/img/cards/`)) {
             zip.extractEntryTo(entry, `build/${locale}/img/cards`, false)
             return
           }
