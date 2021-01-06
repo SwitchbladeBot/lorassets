@@ -23,7 +23,7 @@
   "dependencies": {
     "adm-zip": "^0.4.16",
     "array-flat-polyfill": "^1.0.1",
-    "axios": "^0.20.0",
+    "axios": "^0.21.1",
     "node-fetch": "^2.6.1",
     "node-fetch-progress": "^1.0.2"
   },
